@@ -5,7 +5,7 @@
 
 Name:		dropbear
 Version:	2012.55
-Release:	%mkrel 3
+Release:	4
 Summary:	SSH2 server and client
 
 Group:		Networking/Remote access
@@ -21,11 +21,13 @@ BuildRequires:	zlib-devel
 # register with systemd-logind for now. Should be fixed.
 # https://bugzilla.redhat.com/show_bug.cgi?id=770251
 #BuildRequires:	libpam-devel
-Requires(post):  rpm-helper >= 0.24.8-1
-Requires(preun): rpm-helper >= 0.24.8-1
+%if 0
+Requires(post):	rpm-helper >= 0.24.8-1
+Requires(preun):rpm-helper >= 0.24.8-1
 
 Requires:	initscripts
 Requires(post):	chkconfig >= 0.9, initscripts
+%endif
 
 %description
 Dropbear is a relatively small SSH 2 server and client.  Dropbear
@@ -45,7 +47,6 @@ mv CHANGES{.utf8,}
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 install -d %{buildroot}%{_sysconfdir}/dropbear
 install -d %{buildroot}%{_unitdir}
@@ -61,14 +62,14 @@ install -m 0644 dropbearkey.8 %{buildroot}%{_mandir}/man8/dropbearkey.8
 
 chmod a+r CHANGES INSTALL LICENSE MULTI README SMALL TODO
 
-%clean
-rm -rf %{buildroot}
-
+# we leave it disabled for now..
+%if 0
 %post
 %_post_service %{name}
 
 %preun
 %_preun_service %{name}
+%endif
 
 %files
 %doc CHANGES INSTALL LICENSE MULTI README SMALL TODO
@@ -82,5 +83,3 @@ rm -rf %{buildroot}
 %{_mandir}/man1/dbclient.1*
 %{_mandir}/man8/dropbear.8*
 %{_mandir}/man8/dropbearkey.8*
-
-
