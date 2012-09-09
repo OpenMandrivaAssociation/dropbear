@@ -22,7 +22,7 @@ Patch0:		dropbear-2012.55-whole-program.patch
 
 BuildRequires:	zlib-devel
 %if %{with uclibc}
-BuildRequires:	uclibc-%{_lib}z1
+BuildRequires:	uClibc-devel
 %endif
 # (cg) I tried enabling pam but it seems somewhat broken and doesn't
 # register with systemd-logind for now. Should be fixed.
@@ -84,8 +84,10 @@ LDFLAGS="-Wl,--gc-sections %{ldflags} -Wl,-O2 -flto -Wl,--no-warn-common"
 		--disable-loginfunc \
 		--disable-pututline \
 		--disable-pututxline \
-CC=uclibc-gcc
-%make PROGRAMS="dropbear dbclient" MULTI=1 WHOLE_PROGRAM=1 dropbearmulti
+		--disable-zlib \
+		--disable-shadow \
+		CC=uclibc-gcc
+%make PROGRAMS="dropbear dbclient" MULTI=1 WHOLE_PROGRAM=1 dropbearmulti LDFLAGS="-Wl,--gc-sections %{ldflags} -Wl,-O2 -flto -Wl,--no-warn-common -static"
 #popd
 %endif
 
