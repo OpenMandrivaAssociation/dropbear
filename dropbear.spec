@@ -87,7 +87,7 @@ LDFLAGS="-Wl,--gc-sections %{ldflags} -Wl,-O2 -flto -Wl,--no-warn-common"
 		--disable-zlib \
 		--disable-shadow \
 		CC=uclibc-gcc
-%make PROGRAMS="dropbear dbclient" MULTI=1 WHOLE_PROGRAM=1 dropbearmulti LDFLAGS="-Wl,--gc-sections %{ldflags} -Wl,-O2 -flto -Wl,--no-warn-common -static"
+%make PROGRAMS="dropbear dbclient" MULTI=1 WHOLE_PROGRAM=1 dropbearmulti STATIC=1
 #popd
 %endif
 
