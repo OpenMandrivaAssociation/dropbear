@@ -7,7 +7,7 @@
 
 Name:		dropbear
 Version:	2012.55
-Release:	5
+Release:	6
 Summary:	SSH2 server and client
 
 Group:		Networking/Remote access
@@ -87,7 +87,7 @@ LDFLAGS="-Wl,--gc-sections %{ldflags} -Wl,-O2 -flto -Wl,--no-warn-common"
 		--disable-zlib \
 		--disable-shadow \
 		CC=uclibc-gcc
-%make PROGRAMS="dropbear dbclient" MULTI=1 WHOLE_PROGRAM=1 dropbearmulti STATIC=1
+%make MULTI=1 WHOLE_PROGRAM=1 dropbearmulti STATIC=1 PROGRAMS="dropbear dbclient scp"
 #popd
 %endif
 
