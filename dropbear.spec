@@ -7,7 +7,7 @@
 
 Name:		dropbear
 Version:	2012.55
-Release:	7
+Release:	8
 Summary:	SSH2 server and client
 
 Group:		Networking/Remote access
@@ -94,7 +94,11 @@ LDFLAGS="-Wl,--gc-sections %{ldflags} -Wl,-O2 -flto -Wl,--no-warn-common"
 %install
 %makeinstall_std -C glibc
 %if %{with uclibc}
-install -m755 dropbearmulti -D %{buildroot}%{uclibc_root}%{_sbindir}/dropbearmulti
+install -m755 dropbearmulti -D %{buildroot}%{uclibc_root}%{_bindir}/dropbearmulti
+ln %{buildroot}%{uclibc_root}%{_bindir}/dropbearmulti %{buildroot}%{uclibc_root}%{_bindir}/scp
+ln %{buildroot}%{uclibc_root}%{_bindir}/dropbearmulti %{buildroot}%{uclibc_root}%{_bindir}/ssh
+mkdir -p %{buildroot}%{uclibc_root}%{_sbindir}
+ln %{buildroot}%{uclibc_root}%{_bindir}/dropbearmulti %{buildroot}%{uclibc_root}%{_sbindir}/dropbear
 %endif
 
 install -d %{buildroot}%{_sysconfdir}/dropbear
@@ -134,4 +138,7 @@ chmod a+r CHANGES INSTALL LICENSE MULTI README SMALL TODO
 %{_mandir}/man8/dropbearkey.8*
 
 %files -n uclibc-dropbear
-%{uclibc_root}%{_sbindir}/dropbearmulti
+%{uclibc_root}%{_bindir}/dropbearmulti
+%{uclibc_root}%{_bindir}/scp
+%{uclibc_root}%{_bindir}/ssh
+%{uclibc_root}%{_sbindir}/dropbear
