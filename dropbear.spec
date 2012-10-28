@@ -20,7 +20,7 @@ Source3:	dropbear.init
 # hackish, I hate automake..
 Patch0:		dropbear-2012.55-whole-program.patch
 
-BuildRequires:	zlib-devel
+BuildRequires:	zlib-devel >= 1.2.7-5
 %if %{with uclibc}
 BuildRequires:	uClibc-devel >= 0.9.33.2-16
 %endif
