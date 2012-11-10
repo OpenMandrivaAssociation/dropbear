@@ -1,0 +1,72 @@
+--- dropbear-2012.55/libtomcrypt/Makefile.in.whole_program~	2012-02-23 14:47:05.000000000 +0100
++++ dropbear-2012.55/libtomcrypt/Makefile.in	2012-09-05 03:42:55.839409991 +0200
+@@ -19,7 +19,7 @@ srcdir=@srcdir@
+ 
+ # Compilation flags. Note the += does not write over the user's CFLAGS!
+ # The rest of the flags come from the parent Dropbear makefile
+-CFLAGS += -c -I$(srcdir)/src/headers/ -I$(srcdir)/../
++CFLAGS += -I$(srcdir)/src/headers/ -I$(srcdir)/../
+ 
+ # additional warnings (newer GCC 3.4 and higher)
+ ifdef GCC_34
+@@ -186,6 +186,10 @@ COMPRESSED=crypt-$(VERSION).tar.bz2 cryp
+ default:library
+ 
+ #ciphers come in two flavours... enc+dec and enc 
++src/ciphers/aes/aes_enc.c: src/ciphers/aes/aes.c
++	echo '#define ENCRYPT_ONLY' >> $@
++	cat $< >> $@ 
++
+ src/ciphers/aes/aes_enc.o: src/ciphers/aes/aes.c src/ciphers/aes/aes_tab.c
+ 	$(CC) $(CFLAGS) -DENCRYPT_ONLY -c $< -o src/ciphers/aes/aes_enc.o
+ 
+--- dropbear-2012.55/Makefile.in.whole_program~	2012-02-23 14:47:05.000000000 +0100
++++ dropbear-2012.55/Makefile.in	2012-09-05 03:36:17.449739387 +0200
+@@ -13,12 +13,20 @@ ifndef PROGRAMS
+ 	PROGRAMS=dropbear dbclient dropbearkey dropbearconvert
+ endif
+ 
++ifdef WHOLE_PROGRAM
++include libtomcrypt/Makefile
++LTC := 	$(patsubst %,$(srcdir)/libtomcrypt/%,$(subst .o,.c,$(OBJECTS)))
++include libtommath/Makefile
++LTM := $(patsubst %,$(srcdir)/libtommath/%,$(subst .o,.c,$(OBJECTS)))
++else
+ LTC=libtomcrypt/libtomcrypt.a
+ LTM=libtommath/libtommath.a
++endif
+ 
+ ifeq (@BUNDLED_LIBTOM@, 1)
+ LIBTOM_DEPS=$(LTC) $(LTM)
+ CFLAGS+=-I$(srcdir)/libtomcrypt/src/headers/ 
++CFLAGS+=-I$(srcdir)/libtommath
+ LIBS+=$(LTC) $(LTM)
+ endif
+ 
+@@ -170,8 +178,18 @@ scp: $(SCPOBJS)  $(HEADERS) Makefile
+ MULTIOBJS=
+ ifeq ($(MULTI),1)
+ 	MULTIOBJS=dbmulti.o $(sort $(foreach prog, $(PROGRAMS), $($(prog)objs))) @CRYPTLIB@ 
++ifdef WHOLE_PROGRAM
++	MULTIOBJS :=$(subst .o,.c,$(MULTIOBJS))
+ 	CFLAGS+=$(addprefix -DDBMULTI_, $(PROGRAMS)) -DDROPBEAR_MULTI
+ endif
++endif
++
++ifdef WHOLE_PROGRAM
++aes_enc: 
++	make -C libtomcrypt src/ciphers/aes/aes_enc.c
++dropbearmulti: $(HEADERS) aes_enc Makefile options.h
++	$(CC) $(CFLAGS) $(LDFLAGS) -o dropbearmulti$(EXEEXT) $(MULTIOBJS) $(LIBS)
++else
+ 
+ dropbearmulti: multilink 
+ 
+@@ -179,6 +197,7 @@ multibinary: $(HEADERS) $(MULTIOBJS) $(L
+ 	$(CC) $(LDFLAGS) -o dropbearmulti$(EXEEXT) $(MULTIOBJS) $(LIBS)
+ 
+ multilink: multibinary $(addprefix link, $(PROGRAMS))
++endif
+ 
+ link%:
+ 	-rm -f $*$(EXEEXT)
