@@ -142,3 +142,49 @@ chmod a+r CHANGES INSTALL LICENSE MULTI README SMALL TODO
 %{uclibc_root}%{_bindir}/scp
 %{uclibc_root}%{_bindir}/ssh
 %{uclibc_root}%{_sbindir}/dropbear
+
+%changelog
+* Sun Oct 28 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 2012.55-8
++ Revision: 820210
+- use %%uclibc_configure macro
+- create links for dropbear, ssh & scp from multibinary
+- link uClibc build dynamically
+- reenable zlib for uClibc build
+- build with scp support in uclibc multibinary
+- make a static binary the proper way...
+- disable zlib & shadow for uClibc build
+- make a super small build using -fwhole-program & uClibc (P0)
+
+* Fri May 25 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 2012.55-4
++ Revision: 800525
+- imported from mageia, needed by drakx-installer-rescue..
+- imported package dropbear
+
+* Sat Apr 28 2012 tmb <tmb> 2012.55-3.mga2
++ Revision: 233679
+- Require rpm-helper >= 0.24.8-1 for systemd support
+- rebuild for versioned rpm-helper requires
+
+* Sun Apr 22 2012 colin <colin> 2012.55-1.mga2
++ Revision: 232534
+- New version: 2012.55 (CVE-2012-0920)
+- Add systemd support (PAM registration is broken)
+- Adapt spec to Mageia
+
+* Mon Apr 25 2011 stormi <stormi> 0.53.1-2.mga1
++ Revision: 90810
+- fix RPM group
+
+* Mon Apr 25 2011 tmb <tmb> 0.53.1-1.mga1
++ Revision: 90190
+- imported package dropbear
+
+* Sun Apr 24 2011 Thomas Backlund <tmb@mageia.org> 0.53.1-1.mga1
+- update to 0.53.1
+
+* Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.52-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
+
+* Mon Apr 19 2010 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 0.52-1
+- New version 0.5.2
+
