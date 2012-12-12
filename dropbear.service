@@ -1,0 +1,13 @@
+[Unit]
+Description=Dropbear SSH Server Daemon
+After=network.target
+Wants=dropbear-keygen.service
+
+[Service]
+Type=forking
+PIDFile=/var/run/dropbear.pid
+EnvironmentFile=-/etc/sysconfig/dropbear
+ExecStart=/usr/sbin/dropbear $OPTIONS
+
+[Install]
+WantedBy=multi-user.target

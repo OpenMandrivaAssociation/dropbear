@@ -1,5 +1,2 @@
 sources:
   "dropbear-2012.55.tar.bz2:"	261d033c28031faa34b92390ad5278feb20c6efc
-  "dropbear.init:"	138296380f3d5c545fc359c5de00a4f6bb857d07
-  "dropbear-keygen.service:"	a8f1e94aea0c1318d06a040425a45142053d5b14
-  "dropbear.service:"	2c0fc6eed076707c31851a63ee5169784d659053
