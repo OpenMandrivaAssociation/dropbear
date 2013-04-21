@@ -1,13 +1,13 @@
 # (tmb) temp linking fix
 %define _disable_ld_as_needed 1
 %define _disable_ld_no_undefined 1
-%define year 2012
+%define year 2013
 
 %bcond_without	uclibc
 
 Name:		dropbear
-Version:	2012.55
-Release:	8
+Version:	2013.58
+Release:	1
 Summary:	SSH2 server and client
 
 Group:		Networking/Remote access
