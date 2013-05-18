@@ -137,11 +137,13 @@ chmod a+r CHANGES INSTALL LICENSE MULTI README SMALL TODO
 %{_mandir}/man8/dropbear.8*
 %{_mandir}/man8/dropbearkey.8*
 
+%if %{with uclibc}
 %files -n uclibc-dropbear
 %{uclibc_root}%{_bindir}/dropbearmulti
 %{uclibc_root}%{_bindir}/scp
 %{uclibc_root}%{_bindir}/ssh
 %{uclibc_root}%{_sbindir}/dropbear
+%endif
 
 %changelog
 * Sun Oct 28 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 2012.55-8
