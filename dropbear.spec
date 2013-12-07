@@ -7,7 +7,7 @@
 
 Name:		dropbear
 Version:	2013.60
-Release:	2
+Release:	3
 Summary:	SSH2 server and client
 
 Group:		Networking/Remote access
