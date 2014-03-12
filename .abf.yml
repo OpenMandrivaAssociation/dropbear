@@ -1,4 +1,5 @@
 removed_sources:
   dropbear-2013.58.tar.bz2: fdbc0ed332b17fc7579dbce6d95d585cf5d653d7
-sources:
   dropbear-2013.60.tar.bz2: 5a322945e97d7433cfd829e3a089f2b6c43cbb80
+sources:
+  dropbear-2014.63.tar.bz2: 63bbb967feb1df8bc1a7cb7d96925ed653960078

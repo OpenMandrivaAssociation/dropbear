@@ -6,8 +6,8 @@
 %bcond_without	uclibc
 
 Name:		dropbear
-Version:	2013.60
-Release:	5
+Version:	2014.63
+Release:	1
 Summary:	SSH2 server and client
 
 Group:		Networking/Remote access
@@ -17,8 +17,6 @@ Source0:	http://matt.ucc.asn.au/dropbear/releases/%{name}-%{version}.tar.bz2
 Source1:	dropbear.service
 Source2:	dropbear-keygen.service
 Source3:	dropbear.init
-# hackish, I hate automake..
-Patch0:		dropbear-2012.55-whole-program.patch
 
 BuildRequires:	zlib-devel >= 1.2.7-5
 %if %{with uclibc}
@@ -53,7 +51,7 @@ This package contains an extremely small and minimalistic build.
 
 %prep
 %setup -q
-%patch0 -p1 -b .whole_program~
+%apply_patches
 
 # convert CHANGES to UTF-8
 iconv -f iso-8859-1 -t utf-8 -o CHANGES{.utf8,}
