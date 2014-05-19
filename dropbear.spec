@@ -17,6 +17,7 @@ Source0:	http://matt.ucc.asn.au/dropbear/releases/%{name}-%{version}.tar.bz2
 Source1:	dropbear.service
 Source2:	dropbear-keygen.service
 Source3:	dropbear.init
+Patch0:		dropbear-2014.63-whole-program.patch
 
 BuildRequires:	zlib-devel >= 1.2.7-5
 %if %{with uclibc}
