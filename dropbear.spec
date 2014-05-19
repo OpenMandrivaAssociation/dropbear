@@ -25,7 +25,7 @@ BuildRequires:	uClibc-devel >= 0.9.33.2-16
 # (cg) I tried enabling pam but it seems somewhat broken and doesn't
 # register with systemd-logind for now. Should be fixed.
 # https://bugzilla.redhat.com/show_bug.cgi?id=770251
-#BuildRequires:	libpam-devel
+BuildRequires:	pam-devel
 %if 0
 Requires(post):	rpm-helper >= 0.24.8-1
 Requires(preun):rpm-helper >= 0.24.8-1
