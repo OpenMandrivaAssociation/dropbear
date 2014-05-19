@@ -7,7 +7,7 @@
 
 Name:		dropbear
 Version:	2014.63
-Release:	1
+Release:	2
 Summary:	SSH2 server and client
 
 Group:		Networking/Remote access
@@ -61,8 +61,7 @@ mv CHANGES{.utf8,}
 mkdir -p glibc
 pushd glibc
 CONFIGURE_TOP=.. \
-%configure
-# --enable-pam
+%configure	--enable-pam
 %make
 popd
 
@@ -75,6 +74,7 @@ COLLECT_CC=uclibc-gcc \
 CFLAGS="%{uclibc_cflags} -flto -ffunction-sections -fdata-sections -fwhole-program" \
 LDFLAGS="-Wl,--gc-sections %{ldflags} -Wl,-O2 -flto -Wl,--no-warn-common"
 %uclibc_configure \
+		--disable-pam \
 		--disable-lastlog \
 		--disable-utmp \
 		--disable-utmpx \
