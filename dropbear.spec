@@ -1,7 +1,7 @@
 # (tmb) temp linking fix
 %define _disable_ld_as_needed 1
 %define _disable_ld_no_undefined 1
-%define year 2013
+%define year 2014
 
 %bcond_without	uclibc
 
@@ -22,9 +22,6 @@ BuildRequires:	zlib-devel >= 1.2.7-5
 %if %{with uclibc}
 BuildRequires:	uClibc-devel >= 0.9.33.2-16
 %endif
-# (cg) I tried enabling pam but it seems somewhat broken and doesn't
-# register with systemd-logind for now. Should be fixed.
-# https://bugzilla.redhat.com/show_bug.cgi?id=770251
 BuildRequires:	pam-devel
 %if 0
 Requires(post):	rpm-helper >= 0.24.8-1
@@ -62,7 +59,7 @@ mkdir -p glibc
 pushd glibc
 CONFIGURE_TOP=.. \
 %configure	--enable-pam
-%make
+%make -k || make
 popd
 
 %if %{with uclibc}
