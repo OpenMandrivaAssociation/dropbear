@@ -6,8 +6,8 @@
 %bcond_without	uclibc
 
 Name:		dropbear
-Version:	2014.63
-Release:	4
+Version:	2014.65
+Release:	1
 Summary:	SSH2 server and client
 
 Group:		Networking/Remote access
@@ -16,7 +16,6 @@ URL:		http://matt.ucc.asn.au/dropbear/dropbear.html
 Source0:	http://matt.ucc.asn.au/dropbear/releases/%{name}-%{version}.tar.bz2
 Source1:	dropbear.service
 Source2:	dropbear-keygen.service
-Source3:	dropbear.init
 Patch0:		dropbear-2014.63-whole-program.patch
 
 BuildRequires:	zlib-devel >= 1.2.7-5
@@ -24,13 +23,11 @@ BuildRequires:	zlib-devel >= 1.2.7-5
 BuildRequires:	uClibc-devel >= 0.9.33.2-16
 %endif
 BuildRequires:	pam-devel
-%if 0
 Requires(post):	rpm-helper >= 0.24.8-1
 Requires(preun):rpm-helper >= 0.24.8-1
 
 Requires:	initscripts
 Requires(post):	chkconfig >= 0.9, initscripts
-%endif
 
 %description
 Dropbear is a relatively small SSH 2 server and client.  Dropbear
@@ -102,8 +99,6 @@ install -d %{buildroot}%{_sysconfdir}/dropbear
 install -d %{buildroot}%{_unitdir}
 install -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/dropbear.service
 install -m 0644 %{SOURCE2} %{buildroot}%{_unitdir}/dropbear-keygen.service
-install -d %{buildroot}%{_initrddir}
-install -m 0755 %{SOURCE3} %{buildroot}%{_initrddir}/dropbear
 install -d %{buildroot}%{_mandir}/man1
 install -m 0644 dbclient.1 %{buildroot}%{_mandir}/man1/dbclient.1
 install -d %{buildroot}%{_mandir}/man8
@@ -111,20 +106,16 @@ install -m 0644 dropbearkey.1 %{buildroot}%{_mandir}/man1/dropbearkey.1
 
 chmod a+r CHANGES INSTALL LICENSE MULTI README SMALL TODO
 
-# we leave it disabled for now..
-%if 0
 %post
 %_post_service %{name}
 
 %preun
 %_preun_service %{name}
-%endif
 
 %files
 %doc CHANGES INSTALL LICENSE MULTI README SMALL TODO
 %dir %{_sysconfdir}/dropbear
 %{_unitdir}/dropbear*
-%{_initrddir}/dropbear
 %{_bindir}/dropbearkey
 %{_bindir}/dropbearconvert
 %{_bindir}/dbclient
