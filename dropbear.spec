@@ -6,8 +6,8 @@
 %bcond_without	uclibc
 
 Name:		dropbear
-Version:	2014.65
-Release:	2
+Version:	2015.67
+Release:	1
 Summary:	SSH2 server and client
 
 Group:		Networking/Remote access
