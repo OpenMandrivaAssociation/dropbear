@@ -3,11 +3,11 @@
 %define _disable_ld_no_undefined 1
 %define year 2014
 
-%bcond_without	uclibc
+%bcond_with	uclibc
 
 Name:		dropbear
 Version:	2015.67
-Release:	2
+Release:	3
 Summary:	SSH2 server and client
 
 Group:		Networking/Remote access
@@ -34,6 +34,7 @@ Dropbear is a relatively small SSH 2 server and client.  Dropbear
 is particularly useful for "embedded"-type Linux (or other Unix)
 systems, such as wireless routers.
 
+%if %{with uclibc}
 %package -n	uclibc-dropbear
 Summary:	Minimalistic uClibc linked build of dropbear
 
@@ -42,7 +43,7 @@ Dropbear is a relatively small SSH 2 server and client.  Dropbear
 is particularly useful for "embedded"-type Linux (or other Unix)
 systems, such as wireless routers.
 This package contains an extremely small and minimalistic build.
-
+%endif
 
 %prep
 %setup -q
