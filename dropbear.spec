@@ -64,6 +64,7 @@ EOF
 %files
 %doc CHANGES INSTALL LICENSE MULTI README SMALL TODO
 %dir %{_sysconfdir}/dropbear
+%config(noreplace) %{_sysconfdir}/sysconfig/dropbear
 %{_presetdir}/86-dropbear.preset
 %{_unitdir}/dropbear*
 %{_bindir}/dropbearkey
@@ -72,4 +73,5 @@ EOF
 %{_sbindir}/dropbear
 %{_mandir}/man1/dbclient.1*
 %{_mandir}/man1/dropbearkey.1*
+%{_mandir}/man1/dropbearconvert.1*
 %{_mandir}/man8/dropbear.8*
