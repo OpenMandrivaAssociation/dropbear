@@ -51,7 +51,7 @@ install -m 0644 dropbearkey.1 %{buildroot}%{_mandir}/man1/dropbearkey.1
 
 chmod a+r CHANGES INSTALL LICENSE MULTI README SMALL TODO
 
-install -d %{buildroot}%{_sysconfdir}/sysconfig/dropbear
+install -d %{buildroot}%{_sysconfdir}/sysconfig
 cat > %{buildroot}%{_sysconfdir}/sysconfig/dropbear << EOF
 OPTIONS=""
 EOF
