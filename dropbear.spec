@@ -1,11 +1,10 @@
 # (tmb) temp linking fix
 %define _disable_ld_as_needed 1
 %define _disable_ld_no_undefined 1
-%define year 2014
 
 Name:		dropbear
-Version:	2016.72
-Release:	2
+Version:	2018.76
+Release:	1
 Summary:	SSH2 server and client
 
 Group:		Networking/Remote access
@@ -14,7 +13,6 @@ URL:		http://matt.ucc.asn.au/dropbear/dropbear.html
 Source0:	http://matt.ucc.asn.au/dropbear/releases/%{name}-%{version}.tar.bz2
 Source1:	dropbear.service
 Source2:	dropbear-keygen.service
-Patch0:		dropbear-2014.63-whole-program.patch
 BuildRequires:	zlib-devel >= 1.2.7-5
 BuildRequires:	pam-devel
 
@@ -24,8 +22,7 @@ is particularly useful for "embedded"-type Linux (or other Unix)
 systems, such as wireless routers.
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 
 # convert CHANGES to UTF-8
 iconv -f iso-8859-1 -t utf-8 -o CHANGES{.utf8,}
@@ -49,7 +46,7 @@ install -m 0644 dbclient.1 %{buildroot}%{_mandir}/man1/dbclient.1
 install -d %{buildroot}%{_mandir}/man8
 install -m 0644 dropbearkey.1 %{buildroot}%{_mandir}/man1/dropbearkey.1
 
-chmod a+r CHANGES INSTALL LICENSE MULTI README SMALL TODO
+chmod a+r CHANGES INSTALL LICENSE MULTI README SMALL
 
 install -d %{buildroot}%{_sysconfdir}/sysconfig
 cat > %{buildroot}%{_sysconfdir}/sysconfig/dropbear << EOF
@@ -62,7 +59,7 @@ enable dropbear.service
 EOF
 
 %files
-%doc CHANGES INSTALL LICENSE MULTI README SMALL TODO
+%doc CHANGES INSTALL LICENSE MULTI README SMALL
 %dir %{_sysconfdir}/dropbear
 %config(noreplace) %{_sysconfdir}/sysconfig/dropbear
 %{_presetdir}/86-dropbear.preset
