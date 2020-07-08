@@ -3,8 +3,8 @@
 %define _disable_ld_no_undefined 1
 
 Name:		dropbear
-Version:	2019.78
-Release:	2
+Version:	2020.80
+Release:	1
 Summary:	SSH2 server and client
 
 Group:		Networking/Remote access
