@@ -24,18 +24,14 @@ systems, such as wireless routers.
 %prep
 %autosetup -p1
 
-# convert CHANGES to UTF-8
-iconv -f iso-8859-1 -t utf-8 -o CHANGES{.utf8,}
-mv CHANGES{.utf8,}
-
 %build
 CPPFLAGS='-DSFTPSERVER_PATH=\"%{_libdir}/ssh/sftp-server\"' %configure --enable-pam
 
-%make -k || make
+%make_build -k || make
 
 
 %install
-%makeinstall_std
+%make_install
 
 install -d %{buildroot}%{_sysconfdir}/dropbear
 install -d %{buildroot}%{_unitdir}
