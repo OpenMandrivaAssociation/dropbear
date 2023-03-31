@@ -4,7 +4,7 @@
 
 Name:		dropbear
 Version:	2022.83
-Release:	1
+Release:	2
 Summary:	SSH2 server and client
 
 Group:		Networking/Remote access
