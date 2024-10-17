@@ -9,7 +9,7 @@ Summary:	SSH2 server and client
 
 Group:		Networking/Remote access
 License:	MIT
-URL:		http://matt.ucc.asn.au/dropbear/dropbear.html
+URL:		https://matt.ucc.asn.au/dropbear/dropbear.html
 Source0:	http://matt.ucc.asn.au/dropbear/releases/%{name}-%{version}.tar.bz2
 Source1:	dropbear.service
 Source2:	dropbear-keygen.service
