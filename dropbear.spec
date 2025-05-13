@@ -3,8 +3,8 @@
 %define _disable_ld_no_undefined 1
 
 Name:		dropbear
-Version:	2022.83
-Release:	2
+Version:	2025.88
+Release:	1
 Summary:	SSH2 server and client
 
 Group:		Networking/Remote access
@@ -15,6 +15,8 @@ Source1:	dropbear.service
 Source2:	dropbear-keygen.service
 BuildRequires:	zlib-devel >= 1.2.7-5
 BuildRequires:	pam-devel
+BuildRequires:	pkgconfig(libtommath)
+BuildRequires:	pkgconfig(libtomcrypt)
 
 %description
 Dropbear is a relatively small SSH 2 server and client.  Dropbear
@@ -37,12 +39,6 @@ install -d %{buildroot}%{_sysconfdir}/dropbear
 install -d %{buildroot}%{_unitdir}
 install -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/dropbear.service
 install -m 0644 %{SOURCE2} %{buildroot}%{_unitdir}/dropbear-keygen.service
-install -d %{buildroot}%{_mandir}/man1
-install -m 0644 dbclient.1 %{buildroot}%{_mandir}/man1/dbclient.1
-install -d %{buildroot}%{_mandir}/man8
-install -m 0644 dropbearkey.1 %{buildroot}%{_mandir}/man1/dropbearkey.1
-
-chmod a+r CHANGES INSTALL LICENSE MULTI README SMALL
 
 install -d %{buildroot}%{_sysconfdir}/sysconfig
 cat > %{buildroot}%{_sysconfdir}/sysconfig/dropbear << EOF
@@ -55,7 +51,8 @@ enable dropbear.service
 EOF
 
 %files
-%doc CHANGES INSTALL LICENSE MULTI README SMALL
+%doc CHANGES
+%license LICENSE
 %dir %{_sysconfdir}/dropbear
 %config(noreplace) %{_sysconfdir}/sysconfig/dropbear
 %{_presetdir}/86-dropbear.preset
