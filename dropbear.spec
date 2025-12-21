@@ -13,6 +13,7 @@ URL:		https://matt.ucc.asn.au/dropbear/dropbear.html
 Source0:	http://matt.ucc.asn.au/dropbear/releases/%{name}-%{version}.tar.bz2
 Source1:	dropbear.service
 Source2:	dropbear-keygen.service
+BuildRequires:	make
 BuildRequires:	zlib-devel >= 1.2.7-5
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig(libtommath)
