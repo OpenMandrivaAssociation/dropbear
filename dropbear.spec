@@ -3,7 +3,7 @@
 %define _disable_ld_no_undefined 1
 
 Name:		dropbear
-Version:	2025.88
+Version:	2026.94
 Release:	1
 Summary:	SSH2 server and client
 
